@@ -40,3 +40,4 @@ package-lock.json
 *.swp
 *-e
 logs
+.privatekey.ts

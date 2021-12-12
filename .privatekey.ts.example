@@ -1,0 +1,5 @@
+export const ACCOUNT_PRIVATE_KEY = '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff';
+
+export function getOwnerPrivateKey(name: string) :string {
+    return ACCOUNT_PRIVATE_KEY;
+}
