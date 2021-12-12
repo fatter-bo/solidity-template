@@ -2,11 +2,13 @@ arrowParens: avoid
 bracketSpacing: true
 endOfLine: auto
 printWidth: 120
-singleQuote: false
+singleQuote: true
+semi: true
 tabWidth: 2
 trailingComma: all
 
 overrides:
   - files: "*.sol"
     options:
+      singleQuote: false
       tabWidth: 4

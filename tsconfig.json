@@ -13,7 +13,9 @@
     "removeComments": true,
     "resolveJsonModule": true,
     "sourceMap": true,
-    "strict": true,
+    "strict": false,
+    "allowSyntheticDefaultImports": true,
+    "typeRoots": ["node_modules/@0x/typescript-typings/types", "node_modules/@types"],
     "target": "es6"
   },
   "exclude": ["node_modules"],

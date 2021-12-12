@@ -1,28 +1,28 @@
-import "@nomiclabs/hardhat-waffle";
-import "@typechain/hardhat";
-import "hardhat-gas-reporter";
-import "solidity-coverage";
+import '@nomiclabs/hardhat-waffle';
+import '@typechain/hardhat';
+import 'hardhat-gas-reporter';
+import 'solidity-coverage';
 
-import "./tasks/accounts";
-import "./tasks/deploy";
+import './tasks/accounts';
+import './tasks/deploy';
 
-import { resolve } from "path";
+import { resolve } from 'path';
 
-import { config as dotenvConfig } from "dotenv";
-import { HardhatUserConfig } from "hardhat/config";
-import { NetworkUserConfig } from "hardhat/types";
+import { config as dotenvConfig } from 'dotenv';
+import { HardhatUserConfig } from 'hardhat/config';
+import { NetworkUserConfig } from 'hardhat/types';
 
-import { task } from "hardhat/config";
+import { task } from 'hardhat/config';
 
-task("accounts", "Prints the list of accounts", async (args, hre) => {
+task('accounts', 'Prints the list of accounts', async (args, hre) => {
   const accounts = await hre.ethers.getSigners();
 
   for (const account of accounts) {
-    console.info("account:", account.address);
+    console.info('account:', account.address);
   }
 });
 
-dotenvConfig({ path: resolve(__dirname, "./.env") });
+dotenvConfig({ path: resolve(__dirname, './.env') });
 
 const chainIds = {
   goerli: 5,
@@ -36,16 +36,16 @@ const chainIds = {
 // Ensure that we have all the environment variables we need.
 const mnemonic: string | undefined = process.env.MNEMONIC;
 if (!mnemonic) {
-  throw new Error("Please set your MNEMONIC in a .env file");
+  throw new Error('Please set your MNEMONIC in a .env file');
 }
 
 const infuraApiKey: string | undefined = process.env.INFURA_API_KEY;
 if (!infuraApiKey) {
-  throw new Error("Please set your INFURA_API_KEY in a .env file");
+  throw new Error('Please set your INFURA_API_KEY in a .env file');
 }
 
 function getChainConfig(network: keyof typeof chainIds): NetworkUserConfig {
-  const url: string = "https://" + network + ".infura.io/v3/" + infuraApiKey;
+  const url: string = 'https://' + network + '.infura.io/v3/' + infuraApiKey;
   return {
     accounts: {
       count: 10,
@@ -57,13 +57,15 @@ function getChainConfig(network: keyof typeof chainIds): NetworkUserConfig {
   };
 }
 
-const config: HardhatUserConfig = {
-  defaultNetwork: "hardhat",
+// const config: HardhatUserConfig = {
+export default {
+  default: 'hardhat',
+  defaultNetwork: 'hardhat',
   gasReporter: {
-    currency: "USD",
-    enabled: process.env.REPORT_GAS ? true : false,
+    currency: 'USD',
+    enabled: process.env.REPORT_GAS ? true : true,
     excludeContracts: [],
-    src: "./contracts",
+    src: './contracts',
   },
   networks: {
     hardhat: {
@@ -72,20 +74,20 @@ const config: HardhatUserConfig = {
       },
       chainId: chainIds.hardhat,
     },
-    goerli: getChainConfig("goerli"),
-    kovan: getChainConfig("kovan"),
-    rinkeby: getChainConfig("rinkeby"),
-    ropsten: getChainConfig("ropsten"),
+    goerli: getChainConfig('goerli'),
+    kovan: getChainConfig('kovan'),
+    rinkeby: getChainConfig('rinkeby'),
+    ropsten: getChainConfig('ropsten'),
     mainnet: {
-      commit_url: "http://10.0.0.89:18545",
-      commit_ws: "ws://10.0.0.89:18546",
-      url: "http://10.0.0.89:18545",
-      ws: "ws://10.0.0.51:31004",
+      commit_url: 'http://10.0.0.89:18545',
+      commit_ws: 'ws://10.0.0.89:18546',
+      url: 'http://10.0.0.89:18545',
+      ws: 'ws://10.0.0.51:31004',
       slavers: [
-        "ws://10.0.0.51:31004",
-        "ws://10.0.0.89:30004",
-        "ws://10.0.0.89:18546",
-        "wss://mainnet.infura.io/ws/v3/" + infuraApiKey,
+        'ws://10.0.0.51:31004',
+        'ws://10.0.0.89:30004',
+        'ws://10.0.0.89:18546',
+        'wss://mainnet.infura.io/ws/v3/' + infuraApiKey,
       ],
       accounts: {
         mnemonic,
@@ -95,10 +97,10 @@ const config: HardhatUserConfig = {
     bsctestnet: {
       //url: "https://data-seed-prebsc-1-s1.binance.org:8545",
       //url: "https://data-seed-prebsc-2-s1.binance.org:8545",
-      url: "https://data-seed-prebsc-2-s3.binance.org:8545",
+      url: 'https://data-seed-prebsc-2-s3.binance.org:8545',
       gasPrice: 20000000000,
-      rpcUr: "https://data-seed-prebsc-2-s3.binance.org:8545",
-      blockUrl: "https://testnet.bscscan.com/",
+      rpcUr: 'https://data-seed-prebsc-2-s3.binance.org:8545',
+      blockUrl: 'https://testnet.bscscan.com/',
       allowUnlimitedContractSize: true,
       accounts: {
         mnemonic,
@@ -106,8 +108,8 @@ const config: HardhatUserConfig = {
       chainId: 97,
     },
     bsc: {
-      url: "https://dataseed1.binance.org/",
-      blockUrl: "https://bscscan.com/",
+      url: 'https://dataseed1.binance.org/',
+      blockUrl: 'https://bscscan.com/',
       gasPrice: 20000000000,
       accounts: {
         mnemonic,
@@ -115,37 +117,37 @@ const config: HardhatUserConfig = {
       chainId: 56,
     },
     ganache: {
-      url: "http://127.0.0.1:7545",
-      ws: "ws://127.0.0.1:7546",
+      url: 'http://127.0.0.1:7545',
+      ws: 'ws://127.0.0.1:7546',
       allowUnlimitedContractSize: true,
       chainId: 1337,
     },
     localhost: {
-      url: "http://127.0.0.1:8545",
-      ws: "ws://127.0.0.1:8546",
+      url: 'http://127.0.0.1:8545',
+      ws: 'ws://127.0.0.1:8546',
       allowUnlimitedContractSize: true,
       chainId: chainIds.hardhat,
     },
   },
   paths: {
-    sources: "./contracts",
-    tests: "./test",
-    cache: "./build/cache",
-    artifacts: "./build/artifacts",
+    sources: './contracts',
+    tests: './test',
+    cache: './build/cache',
+    artifacts: './build/artifacts',
   },
   typechain: {
-    //outDir: "src/types",
-    target: "ethers-v5",
+    outDir: 'typechain',
+    target: 'ethers-v5',
   },
   solidity: {
     compilers: [
       {
-        version: "0.8.9",
+        version: '0.8.9',
         settings: {
           metadata: {
             // Not including the metadata hash
             // https://github.com/paulrberg/solidity-template/issues/31
-            bytecodeHash: "none",
+            bytecodeHash: 'none',
           },
           // Disable the optimizer when debugging
           // https://hardhat.org/hardhat-network/#solidity-optimizer-support
@@ -156,7 +158,7 @@ const config: HardhatUserConfig = {
         },
       },
       {
-        version: "0.8.6",
+        version: '0.8.6',
         settings: {
           optimizer: {
             enabled: true,
@@ -165,39 +167,35 @@ const config: HardhatUserConfig = {
         },
       },
       {
-        version: "0.8.3",
+        version: '0.8.3',
       },
       {
-        version: "0.5.5",
+        version: '0.5.5',
       },
       {
-        version: "0.6.7",
+        version: '0.6.7',
         settings: {},
       },
       {
-        version: "0.7.4",
+        version: '0.7.4',
       },
       {
-        version: "0.8.4",
+        version: '0.8.4',
       },
       {
-        version: "0.4.23",
+        version: '0.4.23',
       },
     ],
-  },
-  gasReporter: {
-    currency: "USD",
-    enabled: true,
   },
   etherscan: {
     // Your API key for Etherscan
     // Obtain one at https://etherscan.io/
-    apiKey: "<api-key>",
+    apiKey: '<api-key>',
   },
   tenderly: {
-    project: process.env.TENDERLY_PROJECT || "hardcatstudy",
-    username: process.env.TENDERLY_USERNAME || "fatter",
+    project: process.env.TENDERLY_PROJECT || 'hardcatstudy',
+    username: process.env.TENDERLY_USERNAME || 'fatter',
   },
 };
 
-export default config;
+// export default config;
