@@ -2,7 +2,7 @@ import { task } from 'hardhat/config';
 import { TaskArguments } from 'hardhat/types';
 
 import { Greeter } from '../../typechain/Greeter';
-import { Greeter__factory } from '../../src/types/factories/Greeter__factory';
+import { Greeter__factory } from '../../typechain/factories/Greeter__factory';
 
 task('deploy:Greeter')
   .addParam('greeting', 'Say hello, be nice')
