@@ -41,3 +41,4 @@ package-lock.json
 *-e
 logs
 .privatekey.ts
+hardhat.config.ts
