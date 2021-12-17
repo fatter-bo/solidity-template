@@ -10,5 +10,5 @@ trailingComma: all
 overrides:
   - files: "*.sol"
     options:
-      singleQuote: true
+      singleQuote: false
       tabWidth: 4
